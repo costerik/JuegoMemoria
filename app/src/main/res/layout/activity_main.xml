@@ -12,7 +12,8 @@
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textView"
-        android:layout_weight="0.84" />
+        android:layout_weight="0.84"
+        android:textSize="70sp" />
 
     <TableLayout
         android:layout_width="match_parent"
