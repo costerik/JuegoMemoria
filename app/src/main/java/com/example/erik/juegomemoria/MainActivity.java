@@ -7,13 +7,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button btn [] = new Button[16];
     private TextView tv ;
-    private int pairs []= {1,4,6,5,3,8,1,5,7,2,6,7,3,8,4,2};
+    private int pairs [];//{1,4,6,5,3,8,1,5,7,2,6,7,3,8,4,2};
+    private int pairsII []= new int[16];
     private int check [] = new int[2];
     private Button checkBtn [] =new Button[2];
     private int i=0;
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for(int i=0;i<16;i++)
             btn[i].setOnClickListener(this);
+
+        pairs=pairsResult(pairsII);
     }
 
     @Override
@@ -51,6 +55,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public static int randInt(int min, int max) {
+        // Usually this can be a field rather than a method variable
+        Random rand = new Random();
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        return randomNum;
+    }
+
+    public int [] pairsResult(int [] tableSize){
+        int i=0;
+        int p=1;
+        int t=0;
+        int k=0;
+        int [] OPair=new int[tableSize.length];
+        int [] pair=new int[tableSize.length];
+        int [] auxTemp=new int[tableSize.length];
+        while(i<tableSize.length){
+            int j=0;
+            while(j<2){
+                int v=randInt(0,tableSize.length-1);
+                if(pair[v]!=0){
+                    auxTemp[k]=p;
+                    k++;
+                }
+                while(pair[v]==0 && t!=v || v==0 && t==0 && pair[v]==0){
+                    pair[v]=p;
+                    t=v;
+                    //v=v=randInt(0,(tableSize.length/2)-1);
+                }
+                j++;
+            }
+            if(i<(tableSize.length/2)-1){
+                p++;
+            }else{
+                break;
+            }
+            i++;
+        }
+		/*System.out.println("------------------------------------");
+		for(int in=0;in<auxTemp.length;in++){
+			System.out.println("i: "+in+" => "+auxTemp[in]);
+		}
+		System.out.println("------------------------------------");*/
+        int indice2=0;
+        for(int indice=0;indice<auxTemp.length;indice++){
+            if(auxTemp[i]!=0){
+
+            }
+            if(pair[indice]!=0){
+                OPair[indice]=pair[indice];
+            }else if(pair[indice]==0){
+                if(auxTemp[indice2]!=0){
+                    OPair[indice]=auxTemp[indice2];
+                    indice2++;
+                }
+            }
+        }
+
+		/*for(int in=0;in<pair.length;in++){
+			System.out.println("i: "+in+" => "+pair[in]);
+		}
+		System.out.println("------------------------------------");*/
+        return OPair;
     }
 
     public Boolean gameOver(Button [] buttons){
