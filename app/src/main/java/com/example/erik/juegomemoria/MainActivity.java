@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int check [] = new int[2];
     private Button checkBtn [] =new Button[2];
     private int i=0;
+    private int numPairs=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,8 +221,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else{
             if(i==2) {
                 if (check[0] == check[1] && checkBtn[0].getId() != checkBtn[1].getId()) {
+                    numPairs++;
                     checkBtn[0].setVisibility(View.INVISIBLE);
                     checkBtn[1].setVisibility(View.INVISIBLE);
+                    tv.setTextSize(40);
+                    tv.setText("Pairs: "+numPairs);
                 } else {
                     checkBtn[0].setText("");
                     checkBtn[1].setText("");
