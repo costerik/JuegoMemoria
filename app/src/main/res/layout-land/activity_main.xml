@@ -3,26 +3,48 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:weightSum="1"
     android:background="@color/background_color">
 
-    <TextView
-        android:layout_width="247dp"
-        android:layout_height="69dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textView"
-        android:textColor="@color/background_color"
-        android:textSize="40sp"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/display_color"
-        android:fontFamily="sans-serif-condensed" />
+    <LinearLayout
+        android:layout_width="135dp"
+        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:weightSum="1"
+        android:background="@android:color/background_light"
+        android:layout_weight="0.19">
 
-    <TableLayout
-        android:layout_width="257dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:id="@+id/button17" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView"
+            android:textColor="@color/background_color"
+            android:textSize="40sp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/display_color"
+            android:fontFamily="sans-serif-condensed" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -37,7 +59,7 @@
                 android:layout_weight="50"
                 android:clickable="false"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -47,7 +69,7 @@
                 android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -57,7 +79,7 @@
                 android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -67,7 +89,7 @@
                 android:layout_column="3"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
         </TableRow>
 
@@ -83,7 +105,7 @@
                 android:layout_column="0"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -93,7 +115,7 @@
                 android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -103,7 +125,7 @@
                 android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -113,7 +135,7 @@
                 android:layout_column="3"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
         </TableRow>
 
@@ -129,7 +151,7 @@
                 android:layout_column="0"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -139,7 +161,7 @@
                 android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -149,7 +171,7 @@
                 android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -159,7 +181,7 @@
                 android:layout_column="3"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
         </TableRow>
 
@@ -175,7 +197,7 @@
                 android:layout_column="0"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -185,7 +207,7 @@
                 android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -195,7 +217,7 @@
                 android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -205,8 +227,23 @@
                 android:layout_column="3"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#FFF" />
         </TableRow>
-    </TableLayout>
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="135dp"
+        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:weightSum="1"
+        android:background="@android:color/background_light"
+        android:layout_weight="0.19"></LinearLayout>
+
+
 </LinearLayout>
+

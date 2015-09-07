@@ -1,24 +1,35 @@
 package com.example.erik.juegomemoria;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
     private static final String [] BUTTONS_STATES={"button_1","button_2","button_3","button_4","button_5","button_6",
                                             "button_7","button_8","button_9","button_10","button_11","button_12",
                                             "button_13","button_14","button_15","button_16"};
@@ -29,7 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String VALUE_I="valueI";
     private static final String CHECK="check";
     private static final String PAIRS="pairs";
+    protected static final String MATCHS="match";
+    protected static final String NUM_GAME="numGame";
     private Button btn [] = new Button[16];
+    private Button btnHistory;
     private TextView tv ;
     private int pairs [];
     private int pairsII []= new int[16];
@@ -39,12 +53,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int numPairs=0;
     private SoundPool sp;
     int [] sounds=new int[4];
-    MediaPlayer mp;
+    int vecesJugadas;
+    private MediaPlayer mp;
+    private SharedPreferences sharePref;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    private ArrayList<ObjectAxis> list;
+    float x,y,z,last_x,last_y,last_z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Here is all related with Sensor
+        list =new ArrayList<ObjectAxis>();
+
+        sensorManager=(SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
+            sensor=sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        }
+
+        //
+
         tv=(TextView)findViewById(R.id.textView);
         for(int i=0;i<16;i++) {
             btn[i] = (Button) findViewById(R.id.button + i);
@@ -54,10 +86,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for(int i=0;i<16;i++)
             btn[i].setOnClickListener(this);
 
+        btnHistory=(Button)findViewById(R.id.button17);
+        btnHistory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,History.class);
+                startActivity(intent);
+            }
+        });
+        sharePref= PreferenceManager.getDefaultSharedPreferences(this);
+        if(sharePref.getInt(NUM_GAME,0)!= 0){
+            vecesJugadas=sharePref.getInt(NUM_GAME,0);
+            vecesJugadas++;
+        }else{
+            vecesJugadas=1;
+        }
+        SharedPreferences.Editor e= sharePref.edit();
+        e.putInt(NUM_GAME,vecesJugadas);
+        e.commit();
+
         pairs=pairsResult(pairsII);
-        mp=MediaPlayer.create(this, R.raw.track_03);
-        mp.setLooping(true);
-        mp.start();
+        //mp=MediaPlayer.create(this, R.raw.track_03);
+        //mp.setLooping(true);
+
         if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
             AudioAttributes aa = new AudioAttributes.Builder()
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -100,9 +151,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public void onPause(){
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    public void onResume(){
+        mp=MediaPlayer.create(this, R.raw.track_03);
+        mp.setLooping(true);
+        mp.start();
+        sensorManager.registerListener(this, sensor, sensorManager.SENSOR_DELAY_GAME);
+        super.onResume();
+    }
+
+    @Override
     public void onStop(){
         mp.stop();
+        mp.release();
         super.onStop();
+    }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
     }
 
     @Override
@@ -320,5 +392,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(gameOver(btn)){
             tv.setText("YOU WIN!!!");
         }
+        SharedPreferences.Editor editor= sharePref.edit();
+        editor.putInt(MATCHS, numPairs);
+        editor.commit();
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        list.add(new ObjectAxis(event.values[0], event.values[1], event.values[2]));
+        if(checkShake(list)){
+            Log.i("SHAKE", "SHAKE!!!!!");
+            Toast.makeText(this,"shake",Toast.LENGTH_SHORT).show();
+            Intent in=new Intent(MainActivity.this,MainActivity.class);
+            startActivity(in);
+            finish();
+        }
+        Log.i("ONSENSORCHANGED",""+list.size());
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    public Boolean checkShake(ArrayList<ObjectAxis> l){
+        if(l.size()>10){
+            for(int i=0;i<l.size()-1;i++){
+                if(l.get(i+1).getX()-l.get(i).getX()>10F || l.get(i+1).getY()-l.get(i).getY()>10F || l.get(i+1).getZ()-l.get(i).getZ()>10F){
+                    l.clear();
+                    return true;
+                }
+            }
+            l.clear();
+        }
+        return false;
     }
 }

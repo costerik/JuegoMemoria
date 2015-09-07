@@ -38,7 +38,7 @@
                 android:layout_weight="50"
                 android:clickable="false"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -48,7 +48,7 @@
                 android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -58,7 +58,7 @@
                 android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -68,7 +68,7 @@
                 android:layout_column="3"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
         </TableRow>
 
@@ -84,7 +84,7 @@
                 android:layout_column="0"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -94,7 +94,7 @@
                 android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -104,7 +104,7 @@
                 android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -114,7 +114,7 @@
                 android:layout_column="3"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
         </TableRow>
 
@@ -130,7 +130,7 @@
                 android:layout_column="0"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -140,7 +140,7 @@
                 android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -150,7 +150,7 @@
                 android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -160,7 +160,7 @@
                 android:layout_column="3"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
         </TableRow>
 
@@ -176,7 +176,7 @@
                 android:layout_column="0"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -186,7 +186,7 @@
                 android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -196,7 +196,7 @@
                 android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
 
             <Button
@@ -206,8 +206,14 @@
                 android:layout_column="3"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:textColor="#FFF" />
         </TableRow>
     </TableLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History"
+        android:id="@+id/button17" />
 </LinearLayout>
