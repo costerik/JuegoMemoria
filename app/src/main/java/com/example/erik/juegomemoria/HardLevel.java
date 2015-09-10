@@ -29,10 +29,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
+public class HardLevel extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
     private static final String [] BUTTONS_STATES={"button_1","button_2","button_3","button_4","button_5","button_6",
-            "button_7","button_8","button_9","button_10","button_11","button_12",
-            "button_13","button_14","button_15","button_16"};
+            "button_7","button_8","button_9","button_10","button_11","button_12", "button_13","button_14","button_15",
+            "button_16","button_17","button_18","button_19","button_20","button_21","button_22", "button_23","button_24",
+            "button_25","button_26","button_27","button_28", "button_29","button_30","button_31","button_32","button_33",
+            "button_34","button_35","button_36"};
     private static final String BUTTON_CHECK_TEXT="btnChk1Txt";
     private static final String BUTTON_CHECK_ID="btnID";
     private static final String RANDOM_NUMBERS="randomNumbers";
@@ -42,11 +44,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String PAIRS="pairs";
     protected static final String MATCHS="match";
     protected static final String NUM_GAME="numGame";
-    private Button btn [] = new Button[16];
+    private Button btn [] = new Button[36];
     private Button btnHistory;
     private TextView tv ;
     private int pairs [];
-    private int pairsII []= new int[16];
+    private int pairsII []= new int[36];
     private int check [] = new int[2];
     private Button checkBtn [] =new Button[2];
     private int i=0;
@@ -62,10 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_hard_level);
         //Here is all related with Sensor
         list =new ArrayList<ObjectAxis>();
 
@@ -76,20 +76,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //
 
-        tv=(TextView)findViewById(R.id.textView);
-        for(int i=0;i<16;i++) {
-            btn[i] = (Button) findViewById(R.id.button + i);
+        tv=(TextView)findViewById(R.id.textViewHard);
+        for(int i=0;i<36;i++) {
+            Log.i("VALOR BUTTONS",""+R.id.buttonhard+i);
+            btn[i] = (Button) findViewById(R.id.buttonhard + i);
             btn[i].setBackgroundColor(Color.rgb(randInt(0,240), randInt(0,240), randInt(0,240)));
         }
 
-        for(int i=0;i<16;i++)
+        for(int i=0;i<36;i++)
             btn[i].setOnClickListener(this);
 
-        btnHistory=(Button)findViewById(R.id.button17);
+        btnHistory=(Button)findViewById(R.id.button37hard);
         btnHistory.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,History.class);
+                Intent intent = new Intent(HardLevel.this,History.class);
                 startActivity(intent);
             }
         });
@@ -179,10 +180,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_hard_level, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -199,7 +199,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
     public void onSaveInstanceState(Bundle saveInstanceState){
         for(int i=0;i<btn.length;i++){
             saveInstanceState.putInt(BUTTONS_STATES[i],btn[i].getVisibility());
@@ -215,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         saveInstanceState.putInt(PAIRS,numPairs);
         super.onSaveInstanceState(saveInstanceState);
     }
+
     public static int randInt(int min, int max) {
         // Usually this can be a field rather than a method variable
         Random rand = new Random();
@@ -282,89 +282,202 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    public Boolean checkShake(ArrayList<ObjectAxis> l){
+        if(l.size()>10){
+            for(int i=0;i<l.size()-1;i++){
+                if(l.get(i+1).getX()-l.get(i).getX()>10F || l.get(i+1).getY()-l.get(i).getY()>10F || l.get(i+1).getZ()-l.get(i).getZ()>10F){
+                    l.clear();
+                    return true;
+                }
+            }
+            l.clear();
+        }
+        return false;
+    }
+
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
         sp.play(sounds[0],1,1,1,0,1);
-        switch (view.getId()) {
-            case R.id.button:
+        switch (v.getId()) {
+            case R.id.buttonhard:
                 btn[0].setText(String.valueOf(pairs[0]));
                 check[i] = pairs[0];
                 checkBtn[i] = btn[0];
                 break;
-            case R.id.button2:
+            case R.id.button2hard:
                 btn[1].setText(String.valueOf(pairs[1]));
                 check[i] = pairs[1];
                 checkBtn[i] = btn[1];
                 break;
-            case R.id.button3:
+            case R.id.button3hard:
                 btn[2].setText(String.valueOf(pairs[2]));
                 check[i] = pairs[2];
                 checkBtn[i] = btn[2];
                 break;
-            case R.id.button4:
+            case R.id.button4hard:
                 btn[3].setText(String.valueOf(pairs[3]));
                 check[i] = pairs[3];
                 checkBtn[i] = btn[3];
                 break;
-            case R.id.button5:
+            case R.id.button5hard:
                 btn[4].setText(String.valueOf(pairs[4]));
                 check[i] = pairs[4];
                 checkBtn[i] = btn[4];
                 break;
-            case R.id.button6:
+            case R.id.button6hard:
                 btn[5].setText(String.valueOf(pairs[5]));
                 check[i] = pairs[5];
                 checkBtn[i] = btn[5];
                 break;
-            case R.id.button7:
+            case R.id.button7hard:
                 btn[6].setText(String.valueOf(pairs[6]));
                 check[i] = pairs[6];
                 checkBtn[i] = btn[6];
                 break;
-            case R.id.button8:
+            case R.id.button8hard:
                 btn[7].setText(String.valueOf(pairs[7]));
                 check[i] = pairs[7];
                 checkBtn[i] = btn[7];
                 break;
-            case R.id.button9:
+            case R.id.button9hard:
                 btn[8].setText(String.valueOf(pairs[8]));
                 check[i] = pairs[8];
                 checkBtn[i] = btn[8];
                 break;
-            case R.id.button10:
+            case R.id.button10hard:
                 btn[9].setText(String.valueOf(pairs[9]));
                 check[i] = pairs[9];
                 checkBtn[i] = btn[9];
                 break;
-            case R.id.button11:
+            case R.id.button11hard:
                 btn[10].setText(String.valueOf(pairs[10]));
                 check[i] = pairs[10];
                 checkBtn[i] = btn[10];
                 break;
-            case R.id.button12:
+            case R.id.button12hard:
                 btn[11].setText(String.valueOf(pairs[11]));
                 check[i] = pairs[11];
                 checkBtn[i] = btn[11];
                 break;
-            case R.id.button13:
+            case R.id.button13hard:
                 btn[12].setText(String.valueOf(pairs[12]));
                 check[i] = pairs[12];
                 checkBtn[i] = btn[12];
                 break;
-            case R.id.button14:
+            case R.id.button14hard:
                 btn[13].setText(String.valueOf(pairs[13]));
                 check[i] = pairs[13];
                 checkBtn[i] = btn[13];
                 break;
-            case R.id.button15:
+            case R.id.button15hard:
                 btn[14].setText(String.valueOf(pairs[14]));
                 check[i] = pairs[14];
                 checkBtn[i] = btn[14];
                 break;
-            default:
+            case R.id.button16hard:
                 btn[15].setText(String.valueOf(pairs[15]));
                 check[i] = pairs[15];
                 checkBtn[i] = btn[15];
+                break;
+            case R.id.button17hard:
+                btn[16].setText(String.valueOf(pairs[16]));
+                check[i] = pairs[16];
+                checkBtn[i] = btn[16];
+                break;
+            case R.id.button18hard:
+                btn[17].setText(String.valueOf(pairs[17]));
+                check[i] = pairs[17];
+                checkBtn[i] = btn[17];
+                break;
+            case R.id.button19hard:
+                btn[18].setText(String.valueOf(pairs[18]));
+                check[i] = pairs[18];
+                checkBtn[i] = btn[18];
+                break;
+            case R.id.button20hard:
+                btn[19].setText(String.valueOf(pairs[19]));
+                check[i] = pairs[19];
+                checkBtn[i] = btn[19];
+                break;
+            case R.id.button21hard:
+                btn[20].setText(String.valueOf(pairs[20]));
+                check[i] = pairs[20];
+                checkBtn[i] = btn[20];
+                break;
+            case R.id.button22hard:
+                btn[21].setText(String.valueOf(pairs[21]));
+                check[i] = pairs[21];
+                checkBtn[i] = btn[21];
+                break;
+            case R.id.button23hard:
+                btn[22].setText(String.valueOf(pairs[22]));
+                check[i] = pairs[22];
+                checkBtn[i] = btn[22];
+                break;
+            case R.id.button24hard:
+                btn[23].setText(String.valueOf(pairs[23]));
+                check[i] = pairs[23];
+                checkBtn[i] = btn[23];
+                break;
+            case R.id.button25hard:
+                btn[24].setText(String.valueOf(pairs[24]));
+                check[i] = pairs[24];
+                checkBtn[i] = btn[24];
+                break;
+            case R.id.button26hard:
+                btn[25].setText(String.valueOf(pairs[25]));
+                check[i] = pairs[25];
+                checkBtn[i] = btn[25];
+                break;
+            case R.id.button27hard:
+                btn[26].setText(String.valueOf(pairs[26]));
+                check[i] = pairs[26];
+                checkBtn[i] = btn[26];
+                break;
+            case R.id.button28hard:
+                btn[27].setText(String.valueOf(pairs[27]));
+                check[i] = pairs[27];
+                checkBtn[i] = btn[27];
+                break;
+            case R.id.button29hard:
+                btn[28].setText(String.valueOf(pairs[28]));
+                check[i] = pairs[28];
+                checkBtn[i] = btn[28];
+                break;
+            case R.id.button30hard:
+                btn[29].setText(String.valueOf(pairs[29]));
+                check[i] = pairs[29];
+                checkBtn[i] = btn[29];
+                break;
+            case R.id.button31hard:
+                btn[30].setText(String.valueOf(pairs[30]));
+                check[i] = pairs[30];
+                checkBtn[i] = btn[30];
+                break;
+            case R.id.button32hard:
+                btn[31].setText(String.valueOf(pairs[31]));
+                check[i] = pairs[31];
+                checkBtn[i] = btn[31];
+                break;
+            case R.id.button33hard:
+                btn[32].setText(String.valueOf(pairs[32]));
+                check[i] = pairs[32];
+                checkBtn[i] = btn[32];
+                break;
+            case R.id.button34hard:
+                btn[33].setText(String.valueOf(pairs[33]));
+                check[i] = pairs[33];
+                checkBtn[i] = btn[33];
+                break;
+            case R.id.button35hard:
+                btn[34].setText(String.valueOf(pairs[34]));
+                check[i] = pairs[34];
+                checkBtn[i] = btn[34];
+                break;
+            default:
+                btn[35].setText(String.valueOf(pairs[35]));
+                check[i] = pairs[35];
+                checkBtn[i] = btn[35];
                 break;
         }
         i++;
@@ -400,30 +513,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onSensorChanged(SensorEvent event) {
         list.add(new ObjectAxis(event.values[0], event.values[1], event.values[2]));
         if(checkShake(list)){
-            Log.i("SHAKE", "SHAKE!!!!!");
+            //Log.i("SHAKE", "SHAKE!!!!!");
             Toast.makeText(this,"shake",Toast.LENGTH_SHORT).show();
-            Intent in=new Intent(MainActivity.this,MainActivity.class);
+            Intent in=new Intent(HardLevel.this,HardLevel.class);
             startActivity(in);
             finish();
         }
-        Log.i("ONSENSORCHANGED",""+list.size());
+        //Log.i("ONSENSORCHANGED",""+list.size());
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
-
-    public Boolean checkShake(ArrayList<ObjectAxis> l){
-        if(l.size()>10){
-            for(int i=0;i<l.size()-1;i++){
-                if(l.get(i+1).getX()-l.get(i).getX()>10F || l.get(i+1).getY()-l.get(i).getY()>10F || l.get(i+1).getZ()-l.get(i).getZ()>10F){
-                    l.clear();
-                    return true;
-                }
-            }
-            l.clear();
-        }
-        return false;
     }
 }

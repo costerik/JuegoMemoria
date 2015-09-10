@@ -4,4 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_history">History</string>
+    <string name="title_activity_inicio">Inicio</string>
+    <string name="title_activity_easy_level">EasyLevel</string>
+    <string name="title_activity_hard_level">HardLevel</string>
 </resources>
