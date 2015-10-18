@@ -17,7 +17,7 @@
         </activity>
         <activity
             android:name=".Inicio"
-            android:label="@string/title_activity_inicio" >
+            android:label="@string/title_activity_inicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

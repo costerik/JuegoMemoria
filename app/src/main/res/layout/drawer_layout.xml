@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="256dp"
+    android:alpha="0.8"
+    android:background="@drawable/imagen"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world"
+        android:id="@+id/textview"
+        android:padding="16dp"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_gravity="bottom"/>
+
+</FrameLayout>

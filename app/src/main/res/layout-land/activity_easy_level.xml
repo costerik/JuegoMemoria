@@ -6,7 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="horizontal"
     tools:context="com.example.erik.juegomemoria.EasyLevel"
-    android:background="@color/background_color"
+    android:background="@color/primary_dark"
     android:weightSum="1">
 
     <LinearLayout
@@ -33,10 +33,10 @@
     <TextView
         android:layout_width="307dp"
         android:layout_height="0dp"
-        android:textColor="@color/background_color"
+        android:textColor="@color/primary_dark"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textViewEasy"
-        android:background="@color/display_color"
+        android:background="@color/secondary_text"
         android:textSize="70sp"
         android:fontFamily="sans-serif-condensed"
         android:textAlignment="center"

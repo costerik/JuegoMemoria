@@ -1,10 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/primary_dark"
     tools:context="com.example.erik.juegomemoria.Inicio">
 
     <TextView
@@ -12,22 +11,30 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="40sp"
-        android:id="@+id/tcxtView"/>
+        android:id="@+id/tcxtView"
+        android:textColor="#ffffff" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Easy"
-        android:id="@+id/btnEasy"/>
+        android:id="@+id/btnEasy"
+        android:background="#e2ff36" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Medium"
-        android:id="@+id/btnMedium"/>
+        android:id="@+id/btnMedium"
+        android:background="#41ffe9" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Hard"
-        android:id="@+id/btnHard"/>
+        android:id="@+id/btnHard"
+        android:background="#d21dff" />
+    <ImageButton
+        android:background="@drawable/cube_challenge"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 </LinearLayout>
