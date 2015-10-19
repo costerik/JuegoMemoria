@@ -1,5 +1,6 @@
 package com.example.erik.juegomemoria;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class HardLevel extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
+public class HardLevel extends AppCompatActivity implements View.OnClickListener, SensorEventListener,DataDialogFragment.NoticeDialogListener{
     private static final String [] BUTTONS_STATES={"button_1","button_2","button_3","button_4","button_5","button_6",
             "button_7","button_8","button_9","button_10","button_11","button_12", "button_13","button_14","button_15",
             "button_16","button_17","button_18","button_19","button_20","button_21","button_22", "button_23","button_24",
@@ -52,6 +55,7 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
     private int check [] = new int[2];
     private Button checkBtn [] =new Button[2];
     private int i=0;
+    private int intentos=0;
     private int numPairs=0;
     private SoundPool sp;
     int [] sounds=new int[4];
@@ -61,13 +65,18 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
     private SensorManager sensorManager;
     private Sensor sensor;
     private ArrayList<ObjectAxis> list;
+    private static ScoreDAO score;
+    private String name,lastName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hard_level);
+        score=new ScoreDAO(getApplicationContext());
         //Here is all related with Sensor
         list =new ArrayList<ObjectAxis>();
+
+        showNoticeDialog();
 
         sensorManager=(SensorManager)getSystemService(Context.SENSOR_SERVICE);
         if(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
@@ -279,6 +288,7 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
                 return false;
             }
         }
+        score.addEntry(name,lastName,""+intentos,"Hard");
         return true;
     }
 
@@ -500,6 +510,9 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
             }, 100);
             //}
             i=0;
+            intentos++;
+            tv.setTextSize(40);
+            tv.setText("Pairs: "+numPairs+" Tries: "+intentos);
         }
         if(gameOver(btn)){
             tv.setText("YOU WIN!!!");
@@ -513,17 +526,33 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
     public void onSensorChanged(SensorEvent event) {
         list.add(new ObjectAxis(event.values[0], event.values[1], event.values[2]));
         if(checkShake(list)){
-            //Log.i("SHAKE", "SHAKE!!!!!");
-            Toast.makeText(this,"shake",Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content),"Shake baby",Snackbar.LENGTH_SHORT).show();
             Intent in=new Intent(HardLevel.this,HardLevel.class);
             startActivity(in);
             finish();
         }
-        //Log.i("ONSENSORCHANGED",""+list.size());
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new DataDialogFragment();
+        dialog.show(getFragmentManager(), "DataDialogFragment");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        name =((EditText)dialog.getDialog().findViewById(R.id.edtText)).getText().toString();
+        lastName =((EditText)dialog.getDialog().findViewById(R.id.edtText2)).getText().toString();
+        Snackbar.make(findViewById(android.R.id.content), name + " " + lastName, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        finish();
     }
 }

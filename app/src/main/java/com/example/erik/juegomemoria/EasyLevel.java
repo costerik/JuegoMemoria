@@ -1,5 +1,6 @@
 package com.example.erik.juegomemoria;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,13 +24,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class EasyLevel extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
+public class EasyLevel extends AppCompatActivity implements View.OnClickListener, SensorEventListener,DataDialogFragment.NoticeDialogListener{
     private static final String [] BUTTONS_STATES={"button_1","button_2","button_3","button_4","button_5","button_6",
             "button_7","button_8"};
     private static final String BUTTON_CHECK_TEXT="btnChk1Txt";
@@ -49,6 +52,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
     private Button checkBtn [] =new Button[2];
     private int i=0;
     private int numPairs=0;
+    private int intentos=0;
     private SoundPool sp;
     int [] sounds=new int[4];
     int vecesJugadas;
@@ -57,13 +61,17 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
     private SensorManager sensorManager;
     private Sensor sensor;
     private ArrayList<ObjectAxis> list;
-
+    private static ScoreDAO score;
+    private String name,lastName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy_level);
         //Here is all related with Sensor
         list =new ArrayList<ObjectAxis>();
+        score= new ScoreDAO(getApplicationContext());
+
+        showNoticeDialog();
 
         sensorManager=(SensorManager)getSystemService(Context.SENSOR_SERVICE);
         if(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
@@ -117,7 +125,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
 
             sounds[0] = sp.load(this, R.raw.track_01, 1);
             sounds[1] = sp.load(this, R.raw.track_02, 1);
-            sounds[2]=sp.load(this,R.raw.track_03,1);
+            sounds[2] = sp.load(this,R.raw.track_03,1);
         }else{
             sp=new SoundPool(10, AudioManager.STREAM_MUSIC,1);
             sounds[0]=sp.load(this,R.raw.track_01,1);
@@ -143,6 +151,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
             pairs=savedInstanceState.getIntArray(RANDOM_NUMBERS);
             tv.setText(savedInstanceState.getString(TV_MESSAGE));
         }
+
     }
 
     @Override
@@ -274,6 +283,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
                 return false;
             }
         }
+        score.addEntry(name,lastName,""+intentos,"Easy");
         return true;
     }
 
@@ -338,13 +348,11 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
         i++;
         if(i==2) {
             if (check[0] == check[1] && checkBtn[0].getId() != checkBtn[1].getId()) {
-                sp.play(sounds[1],1,1,1,0,1);
+                sp.play(sounds[1], 1, 1, 1, 0, 1);
                 numPairs++;
                 checkBtn[0].setVisibility(View.INVISIBLE);
                 checkBtn[1].setVisibility(View.INVISIBLE);
-                tv.setTextSize(40);
-                tv.setText("Pairs: "+numPairs);
-            } //else {
+            }
             Handler h= new Handler();
             h.postDelayed(new Runnable() {
                 @Override
@@ -353,8 +361,11 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
                     checkBtn[1].setText("");
                 }
             }, 100);
-            //}
+
             i=0;
+            intentos++;
+            tv.setTextSize(40);
+            tv.setText("Pairs: "+numPairs+" Tries: "+intentos);
         }
         if(gameOver(btn)){
             tv.setText("YOU WIN!!!");
@@ -368,17 +379,33 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
     public void onSensorChanged(SensorEvent event) {
         list.add(new ObjectAxis(event.values[0], event.values[1], event.values[2]));
         if(checkShake(list)){
-            Log.i("SHAKE", "SHAKE!!!!!");
-            Toast.makeText(this, "shake", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content),"Shake baby",Snackbar.LENGTH_SHORT).show();
             Intent in=new Intent(this,EasyLevel.class);
             startActivity(in);
             finish();
         }
-        Log.i("ONSENSORCHANGED",""+list.size());
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new DataDialogFragment();
+        dialog.show(getFragmentManager(), "DataDialogFragment");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        name =((EditText)dialog.getDialog().findViewById(R.id.edtText)).getText().toString();
+        lastName =((EditText)dialog.getDialog().findViewById(R.id.edtText2)).getText().toString();
+        Snackbar.make(findViewById(android.R.id.content),name +" "+lastName,Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        finish();
     }
 }

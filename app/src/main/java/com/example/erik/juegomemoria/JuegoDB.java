@@ -13,5 +13,6 @@ public class JuegoDB {
         public static final String COLUMN_NAME_FIRST_NAME="firstName";
         public static final String COLUMN_NAME_LAST_NAME="lastName";
         public static final String COLUMN_NAME_PUNTUATION="puntuation";
+        public static final String COLUMN_NAME_LEVEL="level";
     }
 }

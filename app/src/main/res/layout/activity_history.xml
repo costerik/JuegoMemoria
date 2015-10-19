@@ -1,24 +1,31 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.erik.juegomemoria.History">
 
-    <TextView android:text="# Juego" android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView1"
+        android:text="# Juego"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="50sp"
-        android:id="@+id/textView1" />
+        android:textColor="@color/abc_primary_text_disable_only_material_dark"
+        android:background="@color/accent_material_light" />
 
     <TextView
+        android:id="@+id/textView2"
         android:text="Puntaje"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="50sp"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textColor="@color/abc_primary_text_disable_only_material_dark"
+        android:background="@color/accent_material_light"/>
 
-</RelativeLayout>
+    <ListView
+        android:id="@+id/score_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/primary"></ListView>
+
+</LinearLayout>

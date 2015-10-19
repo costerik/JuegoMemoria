@@ -35,11 +35,13 @@ public class ScoreDAO {
         mDbHelper.close();
     }
 
-    public long addEntry(String id, String name, String lastName){
+    public long addEntry(String name, String lastName,String puntuation,String level){
         long index;
         ContentValues data=new ContentValues();
         data.put(JuegoDB.ScoreEntry.COLUMN_NAME_FIRST_NAME,name);
         data.put(JuegoDB.ScoreEntry.COLUMN_NAME_LAST_NAME,lastName);
+        data.put(JuegoDB.ScoreEntry.COLUMN_NAME_PUNTUATION,puntuation);
+        data.put(JuegoDB.ScoreEntry.COLUMN_NAME_LEVEL,level);
 
         index=mDatabase.insert(JuegoDB.ScoreEntry.TABLE_NAME,null,data);
 
@@ -54,7 +56,7 @@ public class ScoreDAO {
         Cursor cursor=mDatabase.rawQuery(query,null);
         if(cursor.moveToFirst()){
             do{
-                String data=" id :"+cursor.getString(1)+ " Name: "+cursor.getString(2)+" LastName: "+cursor.getString(3);
+                String data=cursor.getString(1)+" "+cursor.getString(2)+" Score: "+ cursor.getString(3)+" Level: "+cursor.getString(4);
                 list.add(data);
             }while(cursor.moveToNext());
         }
@@ -67,10 +69,12 @@ public class ScoreDAO {
         return mDatabase.delete(JuegoDB.ScoreEntry.TABLE_NAME, JuegoDB.ScoreEntry._ID + "=" + id, null) > 0;
     }
 
-    public boolean updateElement(String id,String name,String lastName){
+    public boolean updateElement(String id,String name,String lastName,String score,String level){
         ContentValues cv=new ContentValues();
         cv.put(JuegoDB.ScoreEntry.COLUMN_NAME_FIRST_NAME, name);
         cv.put(JuegoDB.ScoreEntry.COLUMN_NAME_LAST_NAME, lastName);
+        cv.put(JuegoDB.ScoreEntry.COLUMN_NAME_PUNTUATION,score);
+        cv.put(JuegoDB.ScoreEntry.COLUMN_NAME_LEVEL,level);
         return mDatabase.update(JuegoDB.ScoreEntry.TABLE_NAME, cv, JuegoDB.ScoreEntry._ID + "=" + id, null)>0;
     }
 }

@@ -17,7 +17,8 @@ public class ScoreGameDbHelper extends SQLiteOpenHelper {
                     JuegoDB.ScoreEntry._ID + " INTEGER PRIMARY KEY, " +
                     JuegoDB.ScoreEntry.COLUMN_NAME_FIRST_NAME+TEXT_TYPE+COMMA_SEP+
                     JuegoDB.ScoreEntry.COLUMN_NAME_LAST_NAME+TEXT_TYPE+COMMA_SEP+
-                    JuegoDB.ScoreEntry.COLUMN_NAME_PUNTUATION+TEXT_TYPE+")";
+                    JuegoDB.ScoreEntry.COLUMN_NAME_PUNTUATION+TEXT_TYPE+COMMA_SEP+
+                    JuegoDB.ScoreEntry.COLUMN_NAME_LEVEL+TEXT_TYPE+")";
 
     private static final String SQL_DELETE_ENTRIES=
             "DROP TABLE IF EXISTS "+ JuegoDB.ScoreEntry.TABLE_NAME;
