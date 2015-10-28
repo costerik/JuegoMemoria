@@ -13,6 +13,7 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -28,7 +29,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class EasyLevel extends AppCompatActivity implements View.OnClickListener, SensorEventListener,DataDialogFragment.NoticeDialogListener{
@@ -63,6 +69,9 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
     private ArrayList<ObjectAxis> list;
     private static ScoreDAO score;
     private String name,lastName;
+    private ArrayList values;
+    private List<ParseObject> ob;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +79,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
         //Here is all related with Sensor
         list =new ArrayList<ObjectAxis>();
         score= new ScoreDAO(getApplicationContext());
+
 
         showNoticeDialog();
 
@@ -181,28 +191,6 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
         super.onRestart();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_easy_level, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void onSaveInstanceState(Bundle saveInstanceState){
         for(int i=0;i<btn.length;i++){
             saveInstanceState.putInt(BUTTONS_STATES[i],btn[i].getVisibility());
@@ -284,6 +272,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
             }
         }
         score.addEntry(name,lastName,""+intentos,"Easy");
+        new SendData().execute();
         return true;
     }
 
@@ -407,5 +396,55 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         finish();
+    }
+
+    /*
+       Parse Classes
+    */
+    private class SendData extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            ParseObject testObject=new ParseObject("ScoreTable");
+            //ParseObject testObject=new ParseObject("Memoria");
+            testObject.put("FullName",name+" "+lastName);
+            testObject.put("Score",intentos);
+            testObject.put("Level","Easy");
+
+             /*
+            testObject.put("name",name+" "+lastName);
+            testObject.put("puntos",intentos);
+            testObject.put("nivel","Medium");
+            */
+
+            testObject.saveInBackground();
+            return null;
+        }
+    }
+
+    private class GetData extends AsyncTask<Void,Void,Void>{
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            values= new ArrayList<String>();
+            try{
+                ParseQuery<ParseObject> query=new ParseQuery<ParseObject>("TestObject");
+                ob = query.find();
+                Log.e("GETDATA","????????");
+                for(ParseObject dato : ob){
+                    values.add(dato.get("Number"));
+                }
+                Log.e("GETDATA",""+values.size());
+            } catch (com.parse.ParseException e) {
+                Log.e("Error",e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            /*ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,android.R.id.text1,values);
+            lv.setAdapter(adapter);*/
+        }
     }
 }
