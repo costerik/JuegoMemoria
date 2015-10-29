@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/primary_dark"
+    android:background="@color/accent_material_light"
     tools:context="com.example.erik.juegomemoria.Inicio">
 
     <TextView
@@ -12,27 +12,31 @@
         android:layout_height="wrap_content"
         android:textSize="40sp"
         android:id="@+id/tcxtView"
-        android:textColor="#ffffff" />
+        android:textColor="@color/primary_light"
+        android:gravity="center"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Easy"
         android:id="@+id/btnEasy"
-        android:background="#e2ff36" />
+        android:background="@color/accent_material_dark"
+        android:textColor="@color/primary_light"/>
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Medium"
         android:id="@+id/btnMedium"
-        android:background="#41ffe9" />
+        android:background="@color/divider"
+        android:textColor="@color/primary_light"/>
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Hard"
         android:id="@+id/btnHard"
-        android:background="#d21dff" />
+        android:background="@color/icons"
+        android:textColor="@color/primary_light"/>
     <ImageButton
         android:background="@drawable/cube_challenge"
         android:layout_width="fill_parent"

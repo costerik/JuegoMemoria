@@ -6,15 +6,6 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:text="# Juego"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="50sp"
-        android:textColor="@color/abc_primary_text_disable_only_material_dark"
-        android:background="@color/accent_material_light" />
-
-    <TextView
-        android:id="@+id/textView2"
         android:text="Puntaje"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -26,6 +17,6 @@
         android:id="@+id/score_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/primary"></ListView>
+        android:background="@color/accent"></ListView>
 
 </LinearLayout>

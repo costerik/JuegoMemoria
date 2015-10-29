@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<ObjectAxis> list;
     private ScoreDAO score;
     private String name,lastName;
-    private ArrayList values;
-    private List<ParseObject> ob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +79,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         score=new ScoreDAO(getApplicationContext());
 
-        showNoticeDialog();
+
+        Bundle extras=getIntent().getExtras();
+        name=extras.getString("NAME");
+        lastName=extras.getString("LAST_NAME");
+
+
         //Here is all related with Sensor
         list =new ArrayList<ObjectAxis>();
 
@@ -107,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,History.class);
+                intent.putExtra("LEVEL", "Medio");
                 startActivity(intent);
             }
         });
@@ -276,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return false;
             }
         }
-        score.addEntry(name,lastName,""+intentos,"Medium");
+        score.addEntry(name,lastName,""+intentos,"Medio");
         new SendData().execute();
         return true;
     }
@@ -450,47 +454,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private class SendData extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            ParseObject testObject=new ParseObject("ScoreTable");
-            //ParseObject testObject=new ParseObject("Memoria");
+            /*ParseObject testObject=new ParseObject("ScoreTable");
             testObject.put("FullName",name+" "+lastName);
             testObject.put("Score",intentos);
-            testObject.put("Level","Medium");
+            testObject.put("Level","Medium");*/
 
-            /*
+            ParseObject testObject=new ParseObject("Memoria");
             testObject.put("name",name+" "+lastName);
-            testObject.put("puntos",intentos);
-            testObject.put("nivel","Medium");
-            */
+            testObject.put("puntos",""+intentos);
+            testObject.put("nivel","Medio");
+
 
             testObject.saveInBackground();
             return null;
-        }
-    }
-
-    private class GetData extends AsyncTask<Void,Void,Void>{
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            values= new ArrayList<String>();
-            try{
-                ParseQuery<ParseObject> query=new ParseQuery<ParseObject>("TestObject");
-                ob = query.find();
-                Log.e("GETDATA","????????");
-                for(ParseObject dato : ob){
-                    values.add(dato.get("Number"));
-                }
-                Log.e("GETDATA",""+values.size());
-            } catch (com.parse.ParseException e) {
-                Log.e("Error",e.getMessage());
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result){
-            /*ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,android.R.id.text1,values);
-            lv.setAdapter(adapter);*/
         }
     }
 }

@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EasyLevel extends AppCompatActivity implements View.OnClickListener, SensorEventListener,DataDialogFragment.NoticeDialogListener{
+public class EasyLevel extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
     private static final String [] BUTTONS_STATES={"button_1","button_2","button_3","button_4","button_5","button_6",
             "button_7","button_8"};
     private static final String BUTTON_CHECK_TEXT="btnChk1Txt";
@@ -68,9 +68,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
     private Sensor sensor;
     private ArrayList<ObjectAxis> list;
     private static ScoreDAO score;
-    private String name,lastName;
-    private ArrayList values;
-    private List<ParseObject> ob;
+    private static String name,lastName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +78,10 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
         list =new ArrayList<ObjectAxis>();
         score= new ScoreDAO(getApplicationContext());
 
+        Bundle extras=getIntent().getExtras();
+        name=extras.getString("NAME");
+        lastName=extras.getString("LAST_NAME");
 
-        showNoticeDialog();
 
         sensorManager=(SensorManager)getSystemService(Context.SENSOR_SERVICE);
         if(sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!=null){
@@ -104,6 +104,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EasyLevel.this,History.class);
+                intent.putExtra("LEVEL","Facil");
                 startActivity(intent);
             }
         });
@@ -271,7 +272,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
                 return false;
             }
         }
-        score.addEntry(name,lastName,""+intentos,"Easy");
+        score.addEntry(name,lastName,""+intentos,"Facil");
         new SendData().execute();
         return true;
     }
@@ -380,71 +381,25 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    public void showNoticeDialog() {
-        // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = new DataDialogFragment();
-        dialog.show(getFragmentManager(), "DataDialogFragment");
-    }
-
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        name =((EditText)dialog.getDialog().findViewById(R.id.edtText)).getText().toString();
-        lastName =((EditText)dialog.getDialog().findViewById(R.id.edtText2)).getText().toString();
-        Snackbar.make(findViewById(android.R.id.content),name +" "+lastName,Snackbar.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        finish();
-    }
-
     /*
        Parse Classes
     */
     private class SendData extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            ParseObject testObject=new ParseObject("ScoreTable");
-            //ParseObject testObject=new ParseObject("Memoria");
+            /*ParseObject testObject=new ParseObject("ScoreTable");
             testObject.put("FullName",name+" "+lastName);
             testObject.put("Score",intentos);
-            testObject.put("Level","Easy");
+            testObject.put("Level","Easy");*/
 
-             /*
+            ParseObject testObject=new ParseObject("Memoria");
             testObject.put("name",name+" "+lastName);
-            testObject.put("puntos",intentos);
-            testObject.put("nivel","Medium");
-            */
+            testObject.put("puntos",""+intentos);
+            testObject.put("nivel","Facil");
+
 
             testObject.saveInBackground();
             return null;
-        }
-    }
-
-    private class GetData extends AsyncTask<Void,Void,Void>{
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            values= new ArrayList<String>();
-            try{
-                ParseQuery<ParseObject> query=new ParseQuery<ParseObject>("TestObject");
-                ob = query.find();
-                Log.e("GETDATA","????????");
-                for(ParseObject dato : ob){
-                    values.add(dato.get("Number"));
-                }
-                Log.e("GETDATA",""+values.size());
-            } catch (com.parse.ParseException e) {
-                Log.e("Error",e.getMessage());
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result){
-            /*ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,android.R.id.text1,values);
-            lv.setAdapter(adapter);*/
         }
     }
 }

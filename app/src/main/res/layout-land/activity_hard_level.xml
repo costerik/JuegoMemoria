@@ -3,20 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:background="@color/primary_dark"
+    android:gravity="center"
+    android:background="@color/accent"
     tools:context="com.example.erik.juegomemoria.HardLevel">
 
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:textColor="@color/abc_primary_text_disable_only_material_dark"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/primary_light"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textViewHard"
-        android:background="@color/secondary_text"
+        android:background="@color/accent_material_light"
         android:textSize="70sp"
         android:fontFamily="sans-serif-condensed"
-        android:textAlignment="center" />
+        android:hint="START!!!"
+        android:textColorHint="@color/primary_light"
+        android:gravity="center" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -419,9 +426,12 @@
     </TableLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@color/accent_material_light"
+        android:textColor="@color/primary_light"
         android:text="Score"
         android:id="@+id/button37hard" />
+    </LinearLayout>
 
 </LinearLayout>
