@@ -19,6 +19,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener,Da
     private TextView txtView;
     private Button btn,btn2,btn3;
     private String name,lastName;
+    static String ID_NAME="Erik Ahumada";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener,Da
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
 
-        Parse.enableLocalDatastore(this);
-        //Share
-        Parse.initialize(this, "XYbFuSLcnz3Ro5eVn2QJzvdLvmgquoFDArBfUb4N", "4S9QKHzcznA5LtoVVq11dIFE0GAHzacqYnvMCuHi");
+
         //personal
         //Parse.initialize(this, "zkr1IUMGij72ywEhDqz3VcDNWqYSlyh2Vi3hiPWj", "dgEpX9zfCspuWx7g2BhLCElYY4gdmrfQrXC6PZLe");
         showNoticeDialog();

@@ -69,25 +69,6 @@
                 android:textSize="30sp"
                 android:textColor="#FFF" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button5hard"
-                android:layout_column="4"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button6hard"
-                android:layout_column="5"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
         </TableRow>
 
         <TableRow
@@ -98,7 +79,7 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/button7hard"
+                android:id="@+id/button5hard"
                 android:layout_column="0"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
@@ -108,7 +89,7 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/button8hard"
+                android:id="@+id/button6hard"
                 android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
@@ -118,7 +99,7 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/button9hard"
+                android:id="@+id/button7hard"
                 android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
@@ -128,8 +109,35 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/button10hard"
+                android:id="@+id/button8hard"
                 android:layout_column="3"
+                android:layout_weight="50"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
+                android:textColor="#FFF" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/button9hard"
+                android:layout_column="0"
+                android:layout_weight="50"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="30sp"
+                android:textColor="#FFF" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/button10hard"
+                android:layout_column="1"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="30sp"
@@ -139,7 +147,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/button11hard"
-                android:layout_column="4"
+                android:layout_column="2"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="30sp"
@@ -149,11 +157,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/button12hard"
-                android:layout_column="5"
+                android:layout_column="3"
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="30sp"
                 android:textColor="#FFF" />
+
         </TableRow>
 
         <TableRow
@@ -201,221 +210,6 @@
                 android:textSize="30sp"
                 android:textColor="#FFF" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button17hard"
-                android:layout_column="4"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button18hard"
-                android:layout_column="5"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button19hard"
-                android:layout_column="0"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button20hard"
-                android:layout_column="1"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button21hard"
-                android:layout_column="2"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button22hard"
-                android:layout_column="3"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button23hard"
-                android:layout_column="4"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button24hard"
-                android:layout_column="5"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-        </TableRow>
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button25hard"
-                android:layout_column="0"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button26hard"
-                android:layout_column="1"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button27hard"
-                android:layout_column="2"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button28hard"
-                android:layout_column="3"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button29hard"
-                android:layout_column="4"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button30hard"
-                android:layout_column="5"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-        </TableRow>
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button31hard"
-                android:layout_column="0"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button32hard"
-                android:layout_column="1"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button33hard"
-                android:layout_column="2"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button34hard"
-                android:layout_column="3"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button35hard"
-                android:layout_column="4"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/button36hard"
-                android:layout_column="5"
-                android:layout_weight="50"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="30sp"
-                android:textColor="#FFF" />
         </TableRow>
     </TableLayout>
 

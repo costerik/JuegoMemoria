@@ -41,9 +41,7 @@ import java.util.Random;
 public class HardLevel extends AppCompatActivity implements View.OnClickListener, SensorEventListener,DataDialogFragment.NoticeDialogListener{
     private static final String [] BUTTONS_STATES={"button_1","button_2","button_3","button_4","button_5","button_6",
             "button_7","button_8","button_9","button_10","button_11","button_12", "button_13","button_14","button_15",
-            "button_16","button_17","button_18","button_19","button_20","button_21","button_22", "button_23","button_24",
-            "button_25","button_26","button_27","button_28", "button_29","button_30","button_31","button_32","button_33",
-            "button_34","button_35","button_36"};
+            "button_16"};
     private static final String BUTTON_CHECK_TEXT="btnChk1Txt";
     private static final String BUTTON_CHECK_ID="btnID";
     private static final String RANDOM_NUMBERS="randomNumbers";
@@ -53,11 +51,12 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
     private static final String PAIRS="pairs";
     protected static final String MATCHS="match";
     protected static final String NUM_GAME="numGame";
-    private Button btn [] = new Button[36];
+    private static final String INTENTOS="intentos";
+    private Button btn [] = new Button[16];
     private Button btnHistory;
     private TextView tv ;
     private int pairs [];
-    private int pairsII []= new int[36];
+    private int pairsII []= new int[16];
     private int check [] = new int[2];
     private Button checkBtn [] =new Button[2];
     private int i=0;
@@ -94,13 +93,13 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
         //
 
         tv=(TextView)findViewById(R.id.textViewHard);
-        for(int i=0;i<36;i++) {
+        for(int i=0;i<16;i++) {
             Log.i("VALOR BUTTONS",""+R.id.buttonhard+i);
             btn[i] = (Button) findViewById(R.id.buttonhard + i);
             btn[i].setBackgroundColor(Color.rgb(randInt(0,240), randInt(0,240), randInt(0,240)));
         }
 
-        for(int i=0;i<36;i++)
+        for(int i=0;i<16;i++)
             btn[i].setOnClickListener(this);
 
         btnHistory=(Button)findViewById(R.id.button37hard);
@@ -152,6 +151,7 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
             i=savedInstanceState.getInt(VALUE_I);
             check[0]=savedInstanceState.getInt(CHECK);
             numPairs=savedInstanceState.getInt(PAIRS);
+            intentos=savedInstanceState.getInt(INTENTOS);
             for(int i=0;i<btn.length;i++) {
                 if(savedInstanceState.getInt(BUTTONS_STATES[i])==View.INVISIBLE){
                     btn[i].setVisibility(View.INVISIBLE);
@@ -203,6 +203,7 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
             saveInstanceState.putString(BUTTON_CHECK_TEXT, checkBtn[0].getText().toString());
             saveInstanceState.putInt(BUTTON_CHECK_ID, checkBtn[0].getId());
         }
+        saveInstanceState.putInt(INTENTOS,intentos);
         saveInstanceState.putIntArray(RANDOM_NUMBERS, pairs);
         saveInstanceState.putString(TV_MESSAGE,tv.getText().toString());
         saveInstanceState.putInt(VALUE_I,i);
@@ -372,110 +373,10 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
                 check[i] = pairs[14];
                 checkBtn[i] = btn[14];
                 break;
-            case R.id.button16hard:
+            default:
                 btn[15].setText(String.valueOf(pairs[15]));
                 check[i] = pairs[15];
                 checkBtn[i] = btn[15];
-                break;
-            case R.id.button17hard:
-                btn[16].setText(String.valueOf(pairs[16]));
-                check[i] = pairs[16];
-                checkBtn[i] = btn[16];
-                break;
-            case R.id.button18hard:
-                btn[17].setText(String.valueOf(pairs[17]));
-                check[i] = pairs[17];
-                checkBtn[i] = btn[17];
-                break;
-            case R.id.button19hard:
-                btn[18].setText(String.valueOf(pairs[18]));
-                check[i] = pairs[18];
-                checkBtn[i] = btn[18];
-                break;
-            case R.id.button20hard:
-                btn[19].setText(String.valueOf(pairs[19]));
-                check[i] = pairs[19];
-                checkBtn[i] = btn[19];
-                break;
-            case R.id.button21hard:
-                btn[20].setText(String.valueOf(pairs[20]));
-                check[i] = pairs[20];
-                checkBtn[i] = btn[20];
-                break;
-            case R.id.button22hard:
-                btn[21].setText(String.valueOf(pairs[21]));
-                check[i] = pairs[21];
-                checkBtn[i] = btn[21];
-                break;
-            case R.id.button23hard:
-                btn[22].setText(String.valueOf(pairs[22]));
-                check[i] = pairs[22];
-                checkBtn[i] = btn[22];
-                break;
-            case R.id.button24hard:
-                btn[23].setText(String.valueOf(pairs[23]));
-                check[i] = pairs[23];
-                checkBtn[i] = btn[23];
-                break;
-            case R.id.button25hard:
-                btn[24].setText(String.valueOf(pairs[24]));
-                check[i] = pairs[24];
-                checkBtn[i] = btn[24];
-                break;
-            case R.id.button26hard:
-                btn[25].setText(String.valueOf(pairs[25]));
-                check[i] = pairs[25];
-                checkBtn[i] = btn[25];
-                break;
-            case R.id.button27hard:
-                btn[26].setText(String.valueOf(pairs[26]));
-                check[i] = pairs[26];
-                checkBtn[i] = btn[26];
-                break;
-            case R.id.button28hard:
-                btn[27].setText(String.valueOf(pairs[27]));
-                check[i] = pairs[27];
-                checkBtn[i] = btn[27];
-                break;
-            case R.id.button29hard:
-                btn[28].setText(String.valueOf(pairs[28]));
-                check[i] = pairs[28];
-                checkBtn[i] = btn[28];
-                break;
-            case R.id.button30hard:
-                btn[29].setText(String.valueOf(pairs[29]));
-                check[i] = pairs[29];
-                checkBtn[i] = btn[29];
-                break;
-            case R.id.button31hard:
-                btn[30].setText(String.valueOf(pairs[30]));
-                check[i] = pairs[30];
-                checkBtn[i] = btn[30];
-                break;
-            case R.id.button32hard:
-                btn[31].setText(String.valueOf(pairs[31]));
-                check[i] = pairs[31];
-                checkBtn[i] = btn[31];
-                break;
-            case R.id.button33hard:
-                btn[32].setText(String.valueOf(pairs[32]));
-                check[i] = pairs[32];
-                checkBtn[i] = btn[32];
-                break;
-            case R.id.button34hard:
-                btn[33].setText(String.valueOf(pairs[33]));
-                check[i] = pairs[33];
-                checkBtn[i] = btn[33];
-                break;
-            case R.id.button35hard:
-                btn[34].setText(String.valueOf(pairs[34]));
-                check[i] = pairs[34];
-                checkBtn[i] = btn[34];
-                break;
-            default:
-                btn[35].setText(String.valueOf(pairs[35]));
-                check[i] = pairs[35];
-                checkBtn[i] = btn[35];
                 break;
         }
         i++;
@@ -555,7 +456,8 @@ public class HardLevel extends AppCompatActivity implements View.OnClickListener
             testObject.put("Score",intentos);
             testObject.put("Level","Hard");*/
 
-            ParseObject testObject=new ParseObject("Memoria");
+            ParseObject testObject=new ParseObject("memoria");
+            testObject.put("idname",Inicio.ID_NAME);
             testObject.put("name",name+" "+lastName);
             testObject.put("puntos",""+intentos);
             testObject.put("nivel","Dificil");

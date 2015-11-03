@@ -47,6 +47,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
     private static final String VALUE_I="valueI";
     private static final String CHECK="check";
     private static final String PAIRS="pairs";
+    private static final String INTENTOS="intentos";
     protected static final String MATCHS="match";
     protected static final String NUM_GAME="numGame";
     private Button btn [] = new Button[8];
@@ -148,6 +149,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
             i=savedInstanceState.getInt(VALUE_I);
             check[0]=savedInstanceState.getInt(CHECK);
             numPairs=savedInstanceState.getInt(PAIRS);
+            intentos=savedInstanceState.getInt(INTENTOS);
             for(int i=0;i<btn.length;i++) {
                 if(savedInstanceState.getInt(BUTTONS_STATES[i])==View.INVISIBLE){
                     btn[i].setVisibility(View.INVISIBLE);
@@ -200,6 +202,7 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
             saveInstanceState.putString(BUTTON_CHECK_TEXT, checkBtn[0].getText().toString());
             saveInstanceState.putInt(BUTTON_CHECK_ID, checkBtn[0].getId());
         }
+        saveInstanceState.putInt(INTENTOS,intentos);
         saveInstanceState.putIntArray(RANDOM_NUMBERS, pairs);
         saveInstanceState.putString(TV_MESSAGE,tv.getText().toString());
         saveInstanceState.putInt(VALUE_I,i);
@@ -392,7 +395,8 @@ public class EasyLevel extends AppCompatActivity implements View.OnClickListener
             testObject.put("Score",intentos);
             testObject.put("Level","Easy");*/
 
-            ParseObject testObject=new ParseObject("Memoria");
+            ParseObject testObject=new ParseObject("memoria");
+            testObject.put("idname",Inicio.ID_NAME);
             testObject.put("name",name+" "+lastName);
             testObject.put("puntos",""+intentos);
             testObject.put("nivel","Facil");

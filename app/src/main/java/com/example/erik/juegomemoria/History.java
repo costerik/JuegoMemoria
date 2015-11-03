@@ -61,13 +61,13 @@ public class History extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             values= new ArrayList<String>();
             try{
-                ParseQuery<ParseObject> query=new ParseQuery<ParseObject>("Memoria");
+                ParseQuery<ParseObject> query=new ParseQuery<ParseObject>("memoria");
                 ob = query.find();
                 Log.e("GETDATA", "????????");
                 Log.e("LEVEL",level);
                 for (ParseObject dato : ob){
                     if(String.valueOf(dato.get("nivel")).compareTo(level)==0) {
-                        values.add(new Data(dato.get("name"), dato.get("puntos"), dato.get("nivel")).toString());
+                        values.add(new Data(dato.get("idname"), dato.get("name"), dato.get("nivel"),dato.get("puntos")).toString());
                     }
                     /*values.add(dato.get("name"));
                     values.add(dato.get("puntos"));
@@ -89,15 +89,16 @@ public class History extends AppCompatActivity {
     }
 
     public class Data{
-        Object name,nivel,puntos;
-        public Data(Object name,Object puntos,Object nivel){
+        Object idname,name,nivel,puntos;
+        public Data(Object idname,Object name,Object puntos,Object nivel){
+            this.idname=idname;
             this.name=name;
             this.puntos=puntos;
             this.nivel=nivel;
         }
 
         public String toString(){
-            return name+" "+puntos+" "+nivel;
+            return idname+" "+name+" "+puntos+" "+nivel;
         }
 
     }

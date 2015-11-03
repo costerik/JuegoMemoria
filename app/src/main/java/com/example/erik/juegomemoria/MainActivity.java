@@ -40,8 +40,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener,DataDialogFragment.NoticeDialogListener{
     private static final String [] BUTTONS_STATES={"button_1","button_2","button_3","button_4","button_5","button_6",
-            "button_7","button_8","button_9","button_10","button_11","button_12",
-            "button_13","button_14","button_15","button_16"};
+            "button_7","button_8","button_9","button_10","button_11","button_12"};
     private static final String BUTTON_CHECK_TEXT="btnChk1Txt";
     private static final String BUTTON_CHECK_ID="btnID";
     private static final String RANDOM_NUMBERS="randomNumbers";
@@ -51,11 +50,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String PAIRS="pairs";
     protected static final String MATCHS="match";
     protected static final String NUM_GAME="numGame";
-    private Button btn [] = new Button[16];
+    private static final String INTENTOS="intentos";
+    private Button btn [] = new Button[12];
     private Button btnHistory;
     private TextView tv ;
     private int pairs [];
-    private int pairsII []= new int[16];
+    private int pairsII []= new int[12];
     private int check [] = new int[2];
     private Button checkBtn [] =new Button[2];
     private int i=0;
@@ -97,12 +97,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //
 
         tv=(TextView)findViewById(R.id.textView);
-        for(int i=0;i<16;i++) {
+        for(int i=0;i<12;i++) {
             btn[i] = (Button) findViewById(R.id.button + i);
             btn[i].setBackgroundColor(Color.rgb(randInt(0,240), randInt(0,240), randInt(0,240)));
         }
 
-        for(int i=0;i<16;i++)
+        for(int i=0;i<12;i++)
             btn[i].setOnClickListener(this);
 
         btnHistory=(Button)findViewById(R.id.button17);
@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             i=savedInstanceState.getInt(VALUE_I);
             check[0]=savedInstanceState.getInt(CHECK);
             numPairs=savedInstanceState.getInt(PAIRS);
+            intentos=savedInstanceState.getInt(INTENTOS);
             for(int i=0;i<btn.length;i++) {
                 if(savedInstanceState.getInt(BUTTONS_STATES[i])==View.INVISIBLE){
                     btn[i].setVisibility(View.INVISIBLE);
@@ -209,6 +210,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             saveInstanceState.putString(BUTTON_CHECK_TEXT, checkBtn[0].getText().toString());
             saveInstanceState.putInt(BUTTON_CHECK_ID, checkBtn[0].getId());
         }
+        saveInstanceState.putInt(INTENTOS,intentos);
         saveInstanceState.putIntArray(RANDOM_NUMBERS, pairs);
         saveInstanceState.putString(TV_MESSAGE,tv.getText().toString());
         saveInstanceState.putInt(VALUE_I,i);
@@ -344,30 +346,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 check[i] = pairs[10];
                 checkBtn[i] = btn[10];
                 break;
-            case R.id.button12:
+            default:
                 btn[11].setText(String.valueOf(pairs[11]));
                 check[i] = pairs[11];
                 checkBtn[i] = btn[11];
-                break;
-            case R.id.button13:
-                btn[12].setText(String.valueOf(pairs[12]));
-                check[i] = pairs[12];
-                checkBtn[i] = btn[12];
-                break;
-            case R.id.button14:
-                btn[13].setText(String.valueOf(pairs[13]));
-                check[i] = pairs[13];
-                checkBtn[i] = btn[13];
-                break;
-            case R.id.button15:
-                btn[14].setText(String.valueOf(pairs[14]));
-                check[i] = pairs[14];
-                checkBtn[i] = btn[14];
-                break;
-            default:
-                btn[15].setText(String.valueOf(pairs[15]));
-                check[i] = pairs[15];
-                checkBtn[i] = btn[15];
                 break;
         }
         i++;
@@ -459,7 +441,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             testObject.put("Score",intentos);
             testObject.put("Level","Medium");*/
 
-            ParseObject testObject=new ParseObject("Memoria");
+            ParseObject testObject=new ParseObject("memoria");
+            testObject.put("idname",Inicio.ID_NAME);
             testObject.put("name",name+" "+lastName);
             testObject.put("puntos",""+intentos);
             testObject.put("nivel","Medio");
